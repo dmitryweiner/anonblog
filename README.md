@@ -1,0 +1,4 @@
+anonblog
+========
+
+Anonymous blog
