@@ -21,6 +21,31 @@ class PostController extends Controller
 		);
 	}
 
+    public function filters()
+    {
+        return array(
+            'accessControl',
+        );
+    }
+
+    public function accessRules()
+    {
+        return array(
+            array('allow',
+                'actions'=>array('create'),
+                'users'=>array('*'),
+            ),
+            array('allow',
+                'actions'=>array('delete', 'edit'),
+                'roles'=>array('admin'),
+            ),
+            array('deny',
+                'actions'=>array('delete'),
+                'users'=>array('*'),
+            ),
+        );
+    }
+
 
     public function actionCreate()
     {

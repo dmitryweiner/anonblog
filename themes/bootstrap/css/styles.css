@@ -1,0 +1,22 @@
+#page {
+    padding-top: 60px;
+}
+
+div.date {
+    font-size: 8pt;
+    font-style: italic;
+}
+
+div.text {
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background: #f3f3f3;
+    padding: 7px 8px 5px 8px;
+    font-size: 10pt;
+    line-height: 1.3em;
+}
+
+div.post {
+    padding-bottom: 20px;
+}

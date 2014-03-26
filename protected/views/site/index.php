@@ -3,7 +3,6 @@
 
 $this->pageTitle=Yii::app()->name;
 ?>
-<p><?php echo CHtml::link('Create new post', array('post/create')); ?></p>
 <ul>
     <?php foreach($posts as $post) { ?>
     <li>
@@ -20,9 +19,31 @@ $this->pageTitle=Yii::app()->name;
         </div>
         <div>
             likes:
-            <?php echo CHtml::link('&uarr;', array('like/react', 'reaction'=>'like', 'post_id'=>$post['id'])); ?>
-            <?php echo $post->getLikesRate(); ?>
-            <?php echo CHtml::link('&darr;', array('like/react', 'reaction'=>'dislike', 'post_id'=>$post['id'])); ?>
+            <?php
+            echo CHtml::ajaxLink(
+                $text = '&uarr;',
+                $url = Yii::app()->createUrl('like/react'),
+                $ajaxOptions=array (
+                    'type' => 'POST',
+                    'data' => array('id' => $post['id'], 'reaction' => 'like'),
+                    'dataType' => 'json',
+                    'update' => '#likes'.$post['id']
+                )
+            );
+            ?>
+            <span id="likes<?php echo $post['id'] ?>"><?php echo $post->getLikesRate(); ?></span>
+            <?php
+            echo CHtml::ajaxLink(
+                $text = '&darr;',
+                $url = Yii::app()->createUrl('like/react'),
+                $ajaxOptions=array (
+                    'type' => 'POST',
+                    'data' => array('id' => $post['id'], 'reaction' => 'dislike'),
+                    'dataType' => 'json',
+                    'update' => '#likes'.$post['id']
+                )
+            );
+            ?>
         </div>
         <div>
             <?php if (Yii::app()->user->getState('isAdmin', false)) { ?>
