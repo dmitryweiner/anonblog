@@ -9,9 +9,9 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<h1>Login</h1>
+<h1><?php echo Yii::t("app", "Login") ?></h1>
 
-<p>Please fill out the following form with your login credentials:</p>
+<p><?php echo Yii::t("app", "Please fill out the following form with your login credentials") ?>:</p>
 
 <div class="form">
 
@@ -24,13 +24,11 @@ $this->breadcrumbs=array(
 	),
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note"><?php echo Yii::t("app", "Fields with") ?> <span class="required">*</span> <?php echo Yii::t("app", "are required") ?>.</p>
 
 	<?php echo $form->textFieldRow($model,'username'); ?>
 
-	<?php echo $form->passwordFieldRow($model,'password',array(
-        'hint'=>'Hint: You may login with <kbd>demo</kbd>/<kbd>demo</kbd> or <kbd>admin</kbd>/<kbd>admin</kbd>',
-    )); ?>
+	<?php echo $form->passwordFieldRow($model,'password'); ?>
 
 	<?php echo $form->checkBoxRow($model,'rememberMe'); ?>
 
@@ -38,7 +36,7 @@ $this->breadcrumbs=array(
 		<?php $this->widget('bootstrap.widgets.TbButton', array(
             'buttonType'=>'submit',
             'type'=>'primary',
-            'label'=>'Login',
+            'label'=>Yii::t("app", "Login"),
         )); ?>
 	</div>
 

@@ -55,10 +55,10 @@ class Like extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'Id',
-			'post_id' => 'Post id',
-            'reaction' => 'Reaction',
-			'creation_date' => 'Creation Date',
+			'id' => Yii::t("app", "Id"),
+			'post_id' => Yii::t("app", "Post ID"),
+            'reaction' => Yii::t("app", "Reaction"),
+			'creation_date' => Yii::t("app", "Creation date"),
 		);
 	}
 

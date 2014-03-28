@@ -55,10 +55,10 @@ class Post extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'Id',
-            'title' => 'Title',
-			'post_body' => 'Post Body',
-			'creation_date' => 'Creation Date',
+			'id' => Yii::t("app", "Id"),
+            'title' => Yii::t("app", "Title"),
+			'post_body' => Yii::t("app", "Post body"),
+			'creation_date' => Yii::t("app", "Creation date"),
 		);
 	}
 

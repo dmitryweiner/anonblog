@@ -5,10 +5,10 @@
 
 $this->pageTitle=Yii::app()->name . ' - Login';
 $this->breadcrumbs=array(
-    ($model->isNewRecord ? 'Create' : 'Edit') . ' post',
+    Yii::t("app", ($model->isNewRecord ? 'Create' : 'Edit') . ' post' ),
 );
 ?>
 
-<h1><?php echo $model->isNewRecord ? 'Create' : 'Edit' ?> Post</h1>
+<h1><?php echo Yii::t("app", ($model->isNewRecord ? 'Create' : 'Edit') . ' post' ) ?></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

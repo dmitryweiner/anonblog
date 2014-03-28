@@ -18,7 +18,7 @@ $this->pageTitle=Yii::app()->name;
                 <?php echo $post['post_body']; ?>
             </div>
             <div class="rating">
-                likes:
+                <?php echo Yii::t("app", "likes") ?>:
                 <?php
                 echo CHtml::ajaxLink(
                     $text = '-',
@@ -51,8 +51,8 @@ $this->pageTitle=Yii::app()->name;
             </div>
             <div class="controls">
                 <?php if (Yii::app()->user->getState('isAdmin', false)) { ?>
-                    <?php echo CHtml::link('edit', array('post/edit', 'id'=>$post['id'])); ?>
-                    <?php echo CHtml::link('delete', array('post/delete', 'id'=>$post['id'])); ?>
+                    <?php echo CHtml::link(Yii::t("app", "edit"), array('post/edit', 'id'=>$post['id'])); ?>
+                    <?php echo CHtml::link(Yii::t("app", "delete"), array('post/delete', 'id'=>$post['id'])); ?>
                 <?php } ?>
             </div>
         </div>

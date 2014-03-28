@@ -37,7 +37,7 @@ class PostController extends Controller
             ),
             array('allow',
                 'actions'=>array('delete', 'edit'),
-                'roles'=>array('admin'),
+                'users'=>array('admin'),
             ),
             array('deny',
                 'actions'=>array('delete'),

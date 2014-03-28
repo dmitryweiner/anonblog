@@ -9,7 +9,7 @@
 )); ?>
 
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+    <p class="note"><?php echo Yii::t("app", "Fields with") ?> <span class="required">*</span> <?php echo Yii::t("app", "are required") ?>.</p>
     <fieldset>
 		<?php echo $form->textFieldRow($model,'title',array('class'=>'span8', 'size'=>80,'maxlength'=>128)); ?>
 
@@ -17,8 +17,8 @@
 
     </fieldset>
     <div class="form-actions">
-        <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary', 'label'=> ($model->isNewRecord ? 'Create' : 'Save'))); ?>
-        <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'reset', 'label'=>'Reset')); ?>
+        <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary', 'label'=>Yii::t("app", ($model->isNewRecord ? 'Create' : 'Save')))); ?>
+        <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'reset', 'label'=>Yii::t("app", "Reset"))); ?>
     </div>
 <?php $this->endWidget(); ?>
 

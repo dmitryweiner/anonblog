@@ -9,6 +9,8 @@ Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../extensions/bootstrap');
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Anonblog',
+    'sourceLanguage' => 'en',
+    'language' => 'ru',
 
     'theme'=>'bootstrap',
 
@@ -32,9 +34,11 @@ return array(
 		),
 		*/
         'gii'=>array(
-            'generatorPaths'=>array(
-                'bootstrap.gii',
-            ),
+            'class'=>'system.gii.GiiModule',
+            'password'=>'123',
+            'ipFilters'=>array('10.0.5.148'),
+            'newFileMode'=>0666,
+            'newDirMode'=>0777,
         ),
 
 	),
