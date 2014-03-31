@@ -1,28 +1,28 @@
 <?php
 
 /**
- * This is the model class for table "{{post}}".
+ * This is the model class for table "{{comment}}".
  *
- * The followings are the available columns in table '{{post}}':
+ * The followings are the available columns in table '{{comment}}':
  * @property integer $id
- * @property string $title
- * @property string $message
+ * @property integer $post_id
  * @property integer $user_id
+ * @property integer $previous_comment_id
+ * @property string $message
  * @property string $creation_date
  *
  * The followings are the available model relations:
- * @property Comment[] $comments
- * @property Like[] $likes
  * @property User $user
+ * @property Post $post
  */
-class Post extends CActiveRecord
+class Comment extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return '{{post}}';
+		return '{{comment}}';
 	}
 
 	/**
@@ -33,12 +33,11 @@ class Post extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('title, message, user_id, creation_date', 'required'),
-			array('user_id', 'numerical', 'integerOnly'=>true),
-			array('title', 'length', 'max'=>255),
+			array('post_id, user_id, message, creation_date', 'required'),
+			array('post_id, user_id, previous_comment_id', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, title, message, user_id, creation_date', 'safe', 'on'=>'search'),
+			array('id, post_id, user_id, previous_comment_id, message, creation_date', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -50,9 +49,8 @@ class Post extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'comments' => array(self::HAS_MANY, 'Comment', 'post_id'),
-			'likes' => array(self::HAS_MANY, 'Like', 'post_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
+			'post' => array(self::BELONGS_TO, 'Post', 'post_id'),
 		);
 	}
 
@@ -62,10 +60,12 @@ class Post extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => Yii::t("app", "Id"),
-            'title' => Yii::t("app", "Title"),
-			'message' => Yii::t("app", "Message"),
-			'creation_date' => Yii::t("app", "Creation date"),
+			'id' => 'ID',
+			'post_id' => 'Post',
+			'user_id' => 'User',
+			'previous_comment_id' => 'Previous Comment',
+			'message' => 'Message',
+			'creation_date' => 'Creation Date',
 		);
 	}
 
@@ -81,25 +81,17 @@ class Post extends CActiveRecord
 	 * @return CActiveDataProvider the data provider that can return the models
 	 * based on the search/filter conditions.
 	 */
-
-    public function getLikesRate() {
-        $sql = 'select sum(reaction) from tbl_like where post_id = :id';
-        $command = Yii::app()->db->createCommand($sql);
-        $command->bindParam(':id', $this->id, PDO::PARAM_STR);
-        $likes= $command->queryScalar();
-        return (int) $likes;
-    }
-
 	public function search()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
-        $criteria=new CDbCriteria;
+		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('title',$this->title,true);
-		$criteria->compare('message',$this->message,true);
+		$criteria->compare('post_id',$this->post_id);
 		$criteria->compare('user_id',$this->user_id);
+		$criteria->compare('previous_comment_id',$this->previous_comment_id);
+		$criteria->compare('message',$this->message,true);
 		$criteria->compare('creation_date',$this->creation_date,true);
 
 		return new CActiveDataProvider($this, array(
@@ -111,7 +103,7 @@ class Post extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Post the static model class
+	 * @return Comment the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

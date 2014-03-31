@@ -35,6 +35,8 @@ class LikeController extends Controller
             $model=new Like();
             if(isset($_POST['reaction']) && $post)
             {
+                $data = array();
+
                 if ($_POST['reaction'] == 'like') {
                     $model->reaction  = 1;
                 }
@@ -42,14 +44,15 @@ class LikeController extends Controller
                     $model->reaction  = -1;
                 }
                 $model->post_id = $post->id;
+                $model->user_id = Yii::app()->user->getId();
                 $cookieName = 'already_liked_'.$post->id;
                 if (!isset(Yii::app()->request->cookies[$cookieName])) {
-                    $model->save();
+                    $model->save(false);
                     Yii::app()->request->cookies[$cookieName] = new CHttpCookie($cookieName, 1);
+                } else {
+                    $data['error'][] = 'Already liked';
                 }
-                $data = array(
-                    'result' => $post->getLikesRate(),
-                );
+                $data['result'] = $post->getLikesRate();
                 echo CJavaScript::jsonEncode($data);
             }
         }

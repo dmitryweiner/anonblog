@@ -15,7 +15,7 @@ $this->pageTitle=Yii::app()->name;
             <i><?php echo $post['creation_date']; ?></i>
         </div>
         <div>
-            <?php echo $post['post_body']; ?>
+            <?php echo $post['message']; ?>
         </div>
         <div>
             likes:

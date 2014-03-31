@@ -15,7 +15,7 @@ $this->pageTitle=Yii::app()->name;
                 <?php echo $post['creation_date']; ?>
             </div>
             <div class="text">
-                <?php echo $post['post_body']; ?>
+                <?php echo $post['message']; ?>
             </div>
             <div class="rating">
                 <?php echo Yii::t("app", "likes") ?>:

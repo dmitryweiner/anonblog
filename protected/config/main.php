@@ -36,7 +36,6 @@ return array(
         'gii'=>array(
             'class'=>'system.gii.GiiModule',
             'password'=>'123',
-            'ipFilters'=>array('10.0.5.148'),
             'newFileMode'=>0666,
             'newDirMode'=>0777,
         ),
@@ -64,7 +63,10 @@ return array(
 		),
 		*/
 		'db'=>array(
-			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/anonblog.sqlite',
+			//'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/anonblog.sqlite',
+            'connectionString'=>'mysql:host=localhost;dbname=anonblog',
+            'username'=>'root',
+            'password'=>'',
             'tablePrefix' => 'tbl_',
 		),
 		// uncomment the following to use a MySQL database

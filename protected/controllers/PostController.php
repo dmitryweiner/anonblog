@@ -53,8 +53,11 @@ class PostController extends Controller
         if(isset($_POST['Post']))
         {
             $model->attributes=$_POST['Post'];
-            if($model->save())
+            $model->user_id = Yii::app()->user->getId();
+
+            if($model->save(false)) {
                 $this->redirect(array('site/index'));
+            }
         }
 
         $this->render('create',array(

@@ -13,7 +13,7 @@
     <fieldset>
 		<?php echo $form->textFieldRow($model,'title',array('class'=>'span8', 'size'=>80,'maxlength'=>128)); ?>
 
-		<?php echo $form->textAreaRow($model,'post_body',array('class'=>'span8', 'rows'=>10, 'cols'=>70)); ?>
+		<?php echo $form->textAreaRow($model,'message',array('class'=>'span8', 'rows'=>10, 'cols'=>70)); ?>
 
     </fieldset>
     <div class="form-actions">

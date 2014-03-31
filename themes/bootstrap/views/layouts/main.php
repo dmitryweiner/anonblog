@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
+    <meta charset="utf-8">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="language" content="en" />
 
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/styles.css" />
 
@@ -24,8 +24,8 @@
             'items'=>array(
                 array('label'=>Yii::t("app", "Home"), 'url'=>array('/site/index')),
                 array('label'=>Yii::t("app", "Create post"), 'url'=>array('/post/create')),
-                array('label'=>Yii::t("app", "Login"), 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-                array('label'=>Yii::t("app", "Logout"), 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest),
+                array('label'=>Yii::t("app", "Login"), 'url'=>array('/user/login'), 'visible'=>Yii::app()->user->isGuest),
+                array('label'=>Yii::t("app", "Logout"), 'url'=>array('/user/logout'), 'visible'=>!Yii::app()->user->isGuest),
             ),
         ),
     ),
