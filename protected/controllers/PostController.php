@@ -108,8 +108,10 @@ class PostController extends Controller
         if (!isset($post)) {
             throw new CHttpException(404,'The requested page does not exist.');
         }
+        $comment=new Comment();
         $this->render('view',array(
             'post'=>$post,
+            'comment'=>$comment,
         ));
     }
 }

@@ -10,6 +10,16 @@ class UserController extends Controller
         );
     }
 
+    public function actions()
+    {
+        return array(
+            'captcha'=>array(
+                'class'=>'CCaptchaAction',
+                'backColor'=>0xFFFFFF,
+            ),
+        );
+    }
+
     public function accessRules()
     {
         return array(
@@ -72,7 +82,8 @@ class UserController extends Controller
             {
                 //echo 'valid'; die;
                 $model->save(false);
-                return $this->redirect(array('site/index'));
+                Yii::app()->user->setFlash('success', "User successfully created!");//todo: translate
+                return $this->redirect(array('user/login'));
 
             } else {
                 //echo 'not valid'; die;

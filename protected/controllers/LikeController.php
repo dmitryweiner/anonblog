@@ -33,7 +33,7 @@ class LikeController extends Controller
             $post=Post::model()->findByPk((int)$_POST['id']);
 
             $model=new Like();
-            if(isset($_POST['reaction']) && $post)
+            if(isset($_POST['reaction']) && $post && !Yii::app()->user->isGuest)
             {
                 $data = array();
 

@@ -7,7 +7,9 @@
  */
 class UserIdentity extends CUserIdentity
 {
+
     private $_id;
+
 	/**
 	 * Authenticates a user.
 	 * The example implementation makes sure if the username and password
@@ -27,6 +29,7 @@ class UserIdentity extends CUserIdentity
             $this->errorCode=self::ERROR_PASSWORD_INVALID;
         } else {
             $this->_id=$record->id;
+            Yii::app()->user->setState('login', $record->login);
             $this->errorCode=self::ERROR_NONE;
             if ($this->username == 'admin') {
                 Yii::app()->user->setState('isAdmin', true);

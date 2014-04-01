@@ -25,6 +25,14 @@
 
     <?php echo $form->passwordFieldRow($model,'password2'); ?>
 
+    <div class="control-group ">
+        <label class="control-label required" for="User_password2"></label>
+        <div class="controls">
+            <?php $this->widget('CCaptcha'); ?>
+        </div>
+    </div>
+    <?php echo $form->textFieldRow($model,'verify_code'); ?>
+
     <div class="form-actions">
         <?php $this->widget('bootstrap.widgets.TbButton', array(
             'buttonType'=>'submit',

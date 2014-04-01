@@ -18,6 +18,7 @@
 class User extends CActiveRecord
 {
     public $password2;
+    public $verify_code;
 
 	/**
 	 * @return string the associated database table name
@@ -41,6 +42,7 @@ class User extends CActiveRecord
             array('login', 'unique'),
             array('password', 'compare', 'compareAttribute'=>'password2'),
             array('login', 'match', 'pattern' => '/^[A-Za-z0-9]+$/u','message' => 'Login contains illegal symbols.'),
+            array('verify_code', 'captcha', 'allowEmpty'=>false),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, login, name, password, creation_date', 'safe', 'on'=>'search'),
@@ -66,6 +68,7 @@ class User extends CActiveRecord
 	 */
 	public function attributeLabels()
 	{
+        //todo: translate
 		return array(
 			'id' => 'ID',
 			'login' => 'Login',
@@ -73,12 +76,13 @@ class User extends CActiveRecord
 			'password' => 'Password',
             'password2' => 'Repeat password',
 			'creation_date' => 'Creation Date',
-		);
+            'verify_code' => 'Verify code',
+        );
 	}
 
     public function safeAttributes()
     {
-        return array('login', 'name', 'password', 'password2');
+        return array('login', 'name', 'password', 'password2', 'verify_code');
     }
 
 	/**
