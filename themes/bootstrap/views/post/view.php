@@ -5,6 +5,10 @@
         </h2>
     </div>
     <div class="date">
+        <b>
+            <?php echo CHtml::link($post->user->login, array('user/view', 'id'=>$post->user->id)); ?>
+        </b>
+        <?php echo Yii::t("app", "at"); ?>
         <?php echo $post['creation_date']; ?>
     </div>
     <div class="text">
@@ -17,7 +21,10 @@
     <?php foreach($post->comments as $comment) { ?>
         <div class="comment">
             <div class="date">
-                <?php echo $comment->user->login; ?> at
+                <b>
+                    <?php echo CHtml::link($comment->user->login, array('user/view', 'id'=>$comment->user->id)); ?>
+                </b>
+                <?php echo Yii::t("app", "at"); ?>
                 <?php echo $comment->creation_date; ?>
             </div>
             <div class="message">

@@ -12,7 +12,11 @@ $this->pageTitle=Yii::app()->name;
                 </h4>
             </div>
             <div class="date">
-                <?php echo $post->user->login; ?> at <?php echo $post['creation_date']; ?>
+                <b>
+                    <?php echo CHtml::link($post->user->login, array('user/view', 'id'=>$post->user->id)); ?>
+                </b>
+                <?php echo Yii::t("app", "at"); ?>
+                <?php echo $post['creation_date']; ?>
             </div>
             <div class="text">
                 <?php echo $post['message']; ?>
@@ -50,7 +54,7 @@ $this->pageTitle=Yii::app()->name;
                 ?>
             </div>
             <div class="controls">
-                <?php echo CHtml::link(count($post->comments)." ".Yii::t("app", "comment(s)"), array('post/view', 'id'=>$post['id'])); ?>
+                <?php echo CHtml::link(Yii::t("app", "comments") . " (".count($post->comments) . ")", array('post/view', 'id'=>$post['id'])); ?>
                 <?php if (Yii::app()->user->getState('isAdmin', false)) { ?>
                     <?php echo CHtml::link(Yii::t("app", "edit"), array('post/edit', 'id'=>$post['id'])); ?>
                     <?php echo CHtml::link(Yii::t("app", "delete"), array('post/delete', 'id'=>$post['id'])); ?>

@@ -24,14 +24,22 @@
             'items'=>array(
                 array('label'=>Yii::t("app", "Home"), 'url'=>array('/site/index')),
                 array('label'=>Yii::t("app", "Create post"), 'url'=>array('/post/create')),
-                array('label'=> Yii::t("app", "Manage users"), 'url'=>array('/admin/user/admin'), 'visible'=>Yii::app()->user->getState('isAdmin', false)),
-                array('label'=> Yii::t("app", "Manage posts"), 'url'=>array('/admin/post/admin'), 'visible'=>Yii::app()->user->getState('isAdmin', false)),
-                array('label'=> Yii::t("app", "Manage comments"), 'url'=>array('/admin/comment/admin'), 'visible'=>Yii::app()->user->getState('isAdmin', false)),
-                array('label'=> Yii::t("app", "Manage likes"), 'url'=>array('/admin/like/admin'), 'visible'=>Yii::app()->user->getState('isAdmin', false)),
-                array('label'=>Yii::t("app", "Login"), 'url'=>array('/user/login'), 'visible'=>Yii::app()->user->isGuest),
-                array('label'=> "(" .Yii::app()->user->getState('login', '') . ") " . Yii::t("app", "Logout"), 'url'=>array('/user/logout'), 'visible'=>!Yii::app()->user->isGuest),
+                array('label'=>Yii::t("app", "Manage"), 'url'=>'#', 'items'=>array(
+                    array('label'=> Yii::t("app", "users"), 'url'=>array('/admin/user/admin'), 'visible'=>Yii::app()->user->getState('isAdmin', false)),
+                    array('label'=> Yii::t("app", "posts"), 'url'=>array('/admin/post/admin'), 'visible'=>Yii::app()->user->getState('isAdmin', false)),
+                    array('label'=> Yii::t("app", "comments"), 'url'=>array('/admin/comment/admin'), 'visible'=>Yii::app()->user->getState('isAdmin', false)),
+                    array('label'=> Yii::t("app", "likes"), 'url'=>array('/admin/like/admin'), 'visible'=>Yii::app()->user->getState('isAdmin', false)),
+                ), 'visible'=>Yii::app()->user->getState('isAdmin', false)),
             ),
         ),
+        array(
+            'class'=>'bootstrap.widgets.TbMenu',
+            'htmlOptions'=>array('class'=>'pull-right'),
+            'items'=>array(
+                    array('label'=>Yii::t("app", "Login"), 'url'=>array('/user/login'), 'visible'=>Yii::app()->user->isGuest),
+                    array('label'=> "(" .Yii::app()->user->getState('login', '') . ") " . Yii::t("app", "Logout"), 'url'=>array('/user/logout'), 'visible'=>!Yii::app()->user->isGuest),
+                ),
+            ),
     ),
 )); ?>
 

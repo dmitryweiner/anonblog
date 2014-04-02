@@ -33,6 +33,7 @@ class m140327_083837_create_db extends CDbMigration
             'message' => 'text NOT NULL',
             'creation_date' => 'timestamp  NOT NULL DEFAULT NOW()',
         ));
+        $this->createIndex('idx_user_login', 'tbl_user', 'login', true);
         $this->addForeignKey('fk_post_user', 'tbl_post', 'user_id', 'tbl_user', 'id','CASCADE','CASCADE');
         $this->addForeignKey('fk_like_post', 'tbl_like', 'post_id', 'tbl_post', 'id','CASCADE','CASCADE');
         $this->addForeignKey('fk_like_user', 'tbl_like', 'user_id', 'tbl_user', 'id','CASCADE','CASCADE');
@@ -42,19 +43,10 @@ class m140327_083837_create_db extends CDbMigration
 
 	public function down()
 	{
-        $this->dropTable('tbl_post');
         $this->dropTable('tbl_like');
-
+        $this->dropTable('tbl_comment');
+        $this->dropTable('tbl_post');
+        $this->dropTable('tbl_user');
 	}
 
-	/*
-	// Use safeUp/safeDown to do migration with transaction
-	public function safeUp()
-	{
-	}
-
-	public function safeDown()
-	{
-	}
-	*/
 }

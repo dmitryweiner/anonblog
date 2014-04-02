@@ -60,12 +60,12 @@ class Comment extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'post_id' => 'Post',
-			'user_id' => 'User',
-			'previous_comment_id' => 'Previous Comment',
-			'message' => 'Message',
-			'creation_date' => 'Creation Date',
+			'id' => Yii::t("app", "ID"),
+			'post_id' => Yii::t("app", "Post"),
+			'user_id' => Yii::t("app", "User"),
+			'previous_comment_id' => Yii::t("app", "Previous Comment"),
+			'message' => Yii::t("app", "Message"),
+			'creation_date' => Yii::t("app", "Creation date"),
 		);
 	}
 

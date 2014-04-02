@@ -70,13 +70,13 @@ class User extends CActiveRecord
 	{
         //todo: translate
 		return array(
-			'id' => 'ID',
-			'login' => 'Login',
-			'name' => 'Name',
-			'password' => 'Password',
-            'password2' => 'Repeat password',
-			'creation_date' => 'Creation Date',
-            'verify_code' => 'Verify code',
+			'id' => Yii::t("app", "Id"),
+			'login' => Yii::t("app", "User login"),
+			'name' => Yii::t("app", "Name"),
+			'password' => Yii::t("app", "Password"),
+            'password2' => Yii::t("app", "Repeat password"),
+			'creation_date' => Yii::t("app", "Creation date"),
+            'verify_code' => Yii::t("app", "Verify code"),
         );
 	}
 
@@ -129,11 +129,7 @@ class User extends CActiveRecord
     {
         if(parent::beforeSave())
         {
-            if($this->isNewRecord)
-            {
-                $this->password = CPasswordHelper::hashPassword($this->password);
-            }
-
+            $this->password = CPasswordHelper::hashPassword($this->password);
             return true;
         }
 
