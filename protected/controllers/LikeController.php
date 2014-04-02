@@ -21,6 +21,25 @@ class LikeController extends Controller
 		);
 	}
 
+    public function filters()
+    {
+        return array(
+            'accessControl',
+        );
+    }
+
+    public function accessRules()
+    {
+        return array(
+            array('allow',
+                'actions'=>array('react'),
+                'users'=>array('@'),
+            ),
+            array('deny',
+                'users'=>array('*'),
+            ),
+        );
+    }
 
     public function actionReact()
     {

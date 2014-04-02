@@ -32,15 +32,18 @@ class PostController extends Controller
     {
         return array(
             array('allow',
-                'actions'=>array('create'),
-                'users'=>array('*'),
+                'actions'=>array('view'),
+                'users'=>array('?'),
+            ),
+            array('allow',
+                'actions'=>array('create', 'view'),
+                'users'=>array('@'),
             ),
             array('allow',
                 'actions'=>array('delete', 'edit'),
-                'users'=>array('admin'),
+                'roles'=>array('admin'),
             ),
             array('deny',
-                'actions'=>array('delete'),
                 'users'=>array('*'),
             ),
         );

@@ -24,8 +24,15 @@ class UserController extends Controller
     {
         return array(
             array('allow',
-                'actions'=>array('registration'),
+                'actions'=>array('registration', 'login', 'captcha'),
                 'users'=>array('?'),
+            ),
+            array('allow',
+                'actions'=>array('logout'),
+                'users'=>array('@'),
+            ),
+            array('deny',
+                'users'=>array('*'),
             ),
         );
     }
