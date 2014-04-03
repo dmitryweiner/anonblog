@@ -34,4 +34,5 @@ return array(
     'Verify code' => 'Код подтверждения',
     'Register' => 'Зарегистрироваться',
     'registered' => 'зарегистрирован',
+    'No comments yet, you will be first!' => 'Комментариев пока нет, вы будете первым!',
 );

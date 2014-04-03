@@ -18,22 +18,27 @@
 
 <div class="comments">
     <h4><?php echo Yii::t("app", "Comments"); ?></h4>
-    <?php foreach($post->comments as $comment) { ?>
-        <div class="comment">
-            <div class="date">
-                <b>
-                    <?php echo CHtml::link($comment->user->login, array('user/view', 'id'=>$comment->user->id)); ?>
-                </b>
-                <?php echo Yii::t("app", "at"); ?>
-                <?php echo $comment->creation_date; ?>
+    <?php if (count($post->comments ) > 0) { ?>
+        <?php foreach($post->comments as $comment) { ?>
+            <div class="comment">
+                <div class="date">
+                    <b>
+                        <?php echo CHtml::link($comment->user->login, array('user/view', 'id'=>$comment->user->id)); ?>
+                    </b>
+                    <?php echo Yii::t("app", "at"); ?>
+                    <?php echo $comment->creation_date; ?>
+                </div>
+                <div class="message">
+                    <?php echo $comment->message; ?>
+                </div>
             </div>
-            <div class="message">
-                <?php echo $comment->message; ?>
-            </div>
-        </div>
+        <?php } ?>
+    <?php } else { ?>
+        <?php echo Yii::t("app", "No comments yet, you will be first!"); ?>
     <?php } ?>
 </div>
 
+<?php if (!Yii::app()->user->isGuest) { ?>
 
 <div class="form">
 <h4><?php echo Yii::t("app", "Leave a comment"); ?></h4>
@@ -62,3 +67,5 @@
 <?php $this->endWidget(); ?>
 
 </div>
+
+<?php } //if not guest ?>
