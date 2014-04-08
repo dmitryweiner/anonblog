@@ -106,7 +106,7 @@ class PostController extends Controller
     {
         if(isset($_GET['id']))
         {
-            $post=Post::model()->findByPk((int)$_GET['id']);
+            $post=Post::model()->with('comments', 'comments.user')->findByPk((int)$_GET['id']);
         }
         if (!isset($post)) {
             throw new CHttpException(404,'The requested page does not exist.');

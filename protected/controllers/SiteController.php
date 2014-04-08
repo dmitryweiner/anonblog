@@ -27,11 +27,18 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
-		// renders the view file 'protected/views/site/index.php'
-		// using the default layout 'protected/views/layouts/main.php'
-        //$posts =  $list= Yii::app()->db->createCommand('select * from tbl_post')->queryAll();
-        $posts = Post::model()->findAll(array('order'=>'creation_date DESC'));
-		$this->render('index', array('posts' => $posts));
+        $criteria=new CDbCriteria();
+        $count=Post::model()->count($criteria);
+        $pages=new CPagination($count);
+
+        // results per page
+        $pages->pageSize = Yii::app()->params->indexPageSize;
+        $pages->applyLimit($criteria);
+        $posts=Post::model()->with('comments', 'comments.user')->findAll($criteria);
+
+        //$posts = Post::model()->with('comments', 'comments.user')->findAll();
+
+		$this->render('index', array('posts' => $posts, 'pages' => $pages));
 	}
 
     /**

@@ -35,4 +35,6 @@ return array(
     'Register' => 'Зарегистрироваться',
     'registered' => 'зарегистрирован',
     'No comments yet, you will be first!' => 'Комментариев пока нет, вы будете первым!',
+    'Post title' => 'Заголовок поста',
+    "New password (leave it blank if you don't want to change)" => 'Новый пароль (оставьте пустым, если не хотите менять)',
 );

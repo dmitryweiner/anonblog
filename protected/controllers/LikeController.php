@@ -62,12 +62,11 @@ class LikeController extends Controller
                 if ($_POST['reaction'] == 'dislike') {
                     $model->reaction  = -1;
                 }
-                $model->post_id = $post->id;
-                $model->user_id = Yii::app()->user->getId();
-                $cookieName = 'already_liked_'.$post->id;
-                if (!isset(Yii::app()->request->cookies[$cookieName])) {
+                $record = Like::model()->findByAttributes(array('post_id' => $post->id, 'user_id' => Yii::app()->user->getId()));
+                if (!$record) {
+                    $model->post_id = $post->id;
+                    $model->user_id = Yii::app()->user->getId();
                     $model->save(false);
-                    Yii::app()->request->cookies[$cookieName] = new CHttpCookie($cookieName, 1);
                 } else {
                     $data['error'][] = 'Already liked';
                 }

@@ -31,7 +31,6 @@ class UserIdentity extends CUserIdentity
             $this->_id=$record->id;
             Yii::app()->user->setState('login', $record->login);
             if ($record->login == 'admin') {
-                Yii::app()->user->setState('isAdmin', true);
                 $this->setState('roles', 'admin');
             } else {
                 $this->setState('roles', 'user');

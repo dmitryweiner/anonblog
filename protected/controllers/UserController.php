@@ -71,7 +71,7 @@ class UserController extends Controller
 
     public function actionRegistration()
 	{
-        $model=new User;
+        $model=new User('registration');
 
         // uncomment the following code to enable ajax-based validation
         /*
@@ -87,7 +87,7 @@ class UserController extends Controller
             $model->attributes=$_POST['User'];
             if($model->validate())
             {
-                //echo 'valid'; die;
+                $model->password = CPasswordHelper::hashPassword($_POST['User']['password']);
                 $model->save(false);
                 Yii::app()->user->setFlash('success', "User successfully created!");//todo: translate
                 return $this->redirect(array('user/login'));

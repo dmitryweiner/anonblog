@@ -1,5 +1,6 @@
 <?php
 /* @var $this SiteController */
+/* @var $post Post */
 
 $this->pageTitle=Yii::app()->name;
 ?>
@@ -19,7 +20,7 @@ $this->pageTitle=Yii::app()->name;
                 <?php echo $post['creation_date']; ?>
             </div>
             <div class="text">
-                <?php echo $post['message']; ?>
+                <?php echo nl2br($post['message']); ?>
             </div>
             <div class="rating">
                 <?php echo Yii::t("app", "likes") ?>:
@@ -54,12 +55,21 @@ $this->pageTitle=Yii::app()->name;
                 ?>
             </div>
             <div class="controls">
-                <?php echo CHtml::link(Yii::t("app", "comments") . " (".count($post->comments) . ")", array('post/view', 'id'=>$post['id'])); ?>
-                <?php if (Yii::app()->user->getState('isAdmin', false)) { ?>
+                <?php echo CHtml::link(Yii::t("app", "comments") . " (". $post->commentsTotal . ")", array('post/view', 'id'=>$post['id'])); ?>
+                <?php if (Yii::app()->user->checkAccess('admin')) { ?>
                     <?php echo CHtml::link(Yii::t("app", "edit"), array('post/edit', 'id'=>$post['id'])); ?>
                     <?php echo CHtml::link(Yii::t("app", "delete"), array('post/delete', 'id'=>$post['id'])); ?>
                 <?php } ?>
             </div>
         </div>
     <?php } ?>
+</div>
+<div class="pagination">
+    <?php $this->widget('CLinkPager', array(
+        'pages' => $pages,
+        'header' => '',
+        'selectedPageCssClass' => 'active',
+        'hiddenPageCssClass' => 'disabled',
+        'htmlOptions' => array('class' => ''),
+    )) ?>
 </div>

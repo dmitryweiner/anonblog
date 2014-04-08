@@ -13,7 +13,7 @@ class CommentController extends Controller
     {
         return array(
             array('allow',
-                'actions'=>array('create', 'view'),
+                'actions'=>array('create'),
                 'users'=>array('@'),
             ),
             array('deny',

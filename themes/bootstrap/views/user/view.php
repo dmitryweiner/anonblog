@@ -1,3 +1,7 @@
+<?php
+/* @var $this UserController */
+/* @var $user User */
+?>
 <div class="user">
     <h2>
         <?php echo $user->login; ?>

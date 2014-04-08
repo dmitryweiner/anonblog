@@ -42,6 +42,14 @@ class Post extends CActiveRecord
 		);
 	}
 
+    public function defaultScope()
+    {
+        return array(
+            'order'=>'post.creation_date DESC',
+            'alias'=>'post'
+        );
+    }
+
 	/**
 	 * @return array relational rules.
 	 */
@@ -51,6 +59,7 @@ class Post extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'comments' => array(self::HAS_MANY, 'Comment', 'post_id'),
+            'commentsTotal' => array(self::STAT,  'Comment', 'post_id'),
 			'likes' => array(self::HAS_MANY, 'Like', 'post_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
 		);
@@ -70,18 +79,10 @@ class Post extends CActiveRecord
 	}
 
 	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
+	 * Calculates total likes ratio for the specific post
 	 *
-	 * Typical usecase:
-	 * - Initialize the model fields with values from filter form.
-	 * - Execute this method to get CActiveDataProvider instance which will filter
-	 * models according to data in model fields.
-	 * - Pass data provider to CGridView, CListView or any similar widget.
-	 *
-	 * @return CActiveDataProvider the data provider that can return the models
-	 * based on the search/filter conditions.
+	 * @return int
 	 */
-
     public function getLikesRate() {
         $sql = 'select sum(reaction) from tbl_like where post_id = :id';
         $command = Yii::app()->db->createCommand($sql);

@@ -6,7 +6,9 @@
 Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../extensions/bootstrap');
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
-return array(
+return CMap::mergeArray(
+    require(dirname(__FILE__).'/common.php'),
+    array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Anonblog',
     'sourceLanguage' => 'en',
@@ -19,7 +21,8 @@ return array(
 
 	// autoloading model and component classes
 	'import'=>array(
-		'application.models.*',
+        'application.models.*',
+		'application.forms.*',
 		'application.components.*',
 	),
 
@@ -53,8 +56,6 @@ return array(
             'class' => 'WebUser',
             'loginUrl'=>array('user/login'),
 		),
-		// uncomment the following to enable URLs in path-format
-		/*
 		'urlManager'=>array(
 			'urlFormat'=>'path',
 			'rules'=>array(
@@ -63,24 +64,6 @@ return array(
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
 		),
-		*/
-		'db'=>array(
-			//'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/anonblog.sqlite',
-            'connectionString'=>'mysql:host=localhost;dbname=anonblog',
-            'username'=>'root',
-            'password'=>'',
-            'tablePrefix' => 'tbl_',
-		),
-		// uncomment the following to use a MySQL database
-		/*
-		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=testdrive',
-			'emulatePrepare' => true,
-			'username' => 'root',
-			'password' => '',
-			'charset' => 'utf8',
-		),
-		*/
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
 			'errorAction'=>'site/error',
@@ -107,5 +90,7 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'webmaster@example.com',
+        'indexPageSize'=>5,
 	),
+    )
 );

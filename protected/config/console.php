@@ -2,7 +2,9 @@
 
 // This is the configuration for yiic console application.
 // Any writable CConsoleApplication properties can be configured here.
-return array(
+return CMap::mergeArray(
+    require(dirname(__FILE__).'/common.php'),
+    array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'My Console Application',
 
@@ -11,12 +13,6 @@ return array(
 
 	// application components
 	'components'=>array(
-        'db'=>array(
-            'connectionString'=>'mysql:host=localhost;dbname=anonblog',
-            'username'=>'root',
-            'password'=>'',
-            'tablePrefix' => 'tbl_',
-        ),
 		'log'=>array(
 			'class'=>'CLogRouter',
 			'routes'=>array(
@@ -27,4 +23,5 @@ return array(
 			),
 		),
 	),
+    )
 );

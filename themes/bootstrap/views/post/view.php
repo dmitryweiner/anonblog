@@ -1,3 +1,8 @@
+<?php
+/* @var $this PostController */
+/* @var $post Post */
+/* @var $comment Comment */
+?>
 <div class="post">
     <div class="title">
         <h2>
@@ -12,24 +17,24 @@
         <?php echo $post['creation_date']; ?>
     </div>
     <div class="text">
-        <?php echo $post['message']; ?>
+        <?php echo nl2br($post['message']); ?>
     </div>
 </div>
 
 <div class="comments">
     <h4><?php echo Yii::t("app", "Comments"); ?></h4>
     <?php if (count($post->comments ) > 0) { ?>
-        <?php foreach($post->comments as $comment) { ?>
+        <?php foreach($post->comments as $oneComment) { ?>
             <div class="comment">
                 <div class="date">
                     <b>
-                        <?php echo CHtml::link($comment->user->login, array('user/view', 'id'=>$comment->user->id)); ?>
+                        <?php echo CHtml::link($oneComment->user->login, array('user/view', 'id'=>$oneComment->user->id)); ?>
                     </b>
                     <?php echo Yii::t("app", "at"); ?>
-                    <?php echo $comment->creation_date; ?>
+                    <?php echo $oneComment->creation_date; ?>
                 </div>
                 <div class="message">
-                    <?php echo $comment->message; ?>
+                    <?php echo nl2br($oneComment->message); ?>
                 </div>
             </div>
         <?php } ?>

@@ -36,13 +36,14 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('login, name, password, password2', 'required'),
+            array('login, name, password, password2', 'safe'),
+			array('login, name, password', 'required'),
 			array('login, name, password', 'length', 'max'=>255),
-            array('password, password2', 'length', 'min'=>6),
+            array('password', 'length', 'min'=>6),
             array('login', 'unique'),
-            array('password', 'compare', 'compareAttribute'=>'password2'),
+            array('password', 'compare', 'compareAttribute'=>'password2', 'on'=>'registration'),
             array('login', 'match', 'pattern' => '/^[A-Za-z0-9]+$/u','message' => 'Login contains illegal symbols.'),
-            array('verify_code', 'captcha', 'allowEmpty'=>false),
+            array('verify_code', 'captcha', 'allowEmpty'=>false, 'on'=>'registration'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, login, name, password, creation_date', 'safe', 'on'=>'search'),
@@ -125,14 +126,4 @@ class User extends CActiveRecord
 		return parent::model($className);
 	}
 
-    protected function beforeSave()
-    {
-        if(parent::beforeSave())
-        {
-            $this->password = CPasswordHelper::hashPassword($this->password);
-            return true;
-        }
-
-        return false;
-    }
 }

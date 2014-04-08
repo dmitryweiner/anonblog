@@ -17,6 +17,8 @@
  */
 class Comment extends CActiveRecord
 {
+    private $__post_title;
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -38,10 +40,19 @@ class Comment extends CActiveRecord
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, post_id, user_id, previous_comment_id, message, creation_date', 'safe', 'on'=>'search'),
+            array('id, post_id, user_id, previous_comment_id, message, creation_date, post_title', 'safe', 'on'=>'searchWithRelated'),
 		);
 	}
 
-	/**
+    public function defaultScope()
+    {
+        return array(
+            'order'=>'comment.creation_date DESC',
+            'alias'=>'comment'
+        );
+    }
+
+    /**
 	 * @return array relational rules.
 	 */
 	public function relations()
@@ -98,6 +109,29 @@ class Comment extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+    public function searchWithRelated()
+    {
+        // @todo Please modify the following code to remove attributes that should not be searched.
+
+        $criteria=new CDbCriteria;
+
+        $criteria->with = array('post');
+        $criteria->together = true;
+
+        $criteria->compare('id',$this->id);
+        $criteria->compare('post_id',$this->post_id);
+        $criteria->compare('user_id',$this->user_id);
+        $criteria->compare('previous_comment_id',$this->previous_comment_id);
+        $criteria->compare('message',$this->message,true);
+        $criteria->compare('creation_date',$this->creation_date,true);
+        $criteria->compare('post.title',$this->__post_title,true);
+
+        return new CActiveDataProvider($this, array(
+            'criteria'=>$criteria,
+        ));
+    }
+
 
 	/**
 	 * Returns the static model of the specified AR class.
