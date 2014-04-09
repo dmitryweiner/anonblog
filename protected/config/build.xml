@@ -1,0 +1,28 @@
+<project name="make_project" basedir="../.." default="build">
+
+    <target name="create_dirs">
+        <echo>Creating necessary directories</echo>
+        <mkdir dir="assets" />
+        <mkdir dir="protected/runtime" />
+    </target>
+
+    <target name="change_rights" depends="create_dirs">
+        <echo>Changing rights</echo>
+        <chmod file="assets" mode="0777" />
+        <chmod file="protected/runtime" mode="0777" />
+    </target>
+
+    <target name="git_pull" depends="change_rights">
+        <echo>git pull</echo>
+        <gitpull repository="./" all="true" />
+    </target>
+
+    <target name="migrate" depends="git_pull">
+        <exec command="yiic migrate --interactive=0" dir="protected" />
+    </target>
+
+    <target name="build" depends="migrate">
+        <echo>Build finished successfully</echo>
+    </target>
+
+</project>
